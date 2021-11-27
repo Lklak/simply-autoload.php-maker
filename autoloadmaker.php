@@ -1,4 +1,7 @@
 <?php
+function removestr($str2rmv, $rmvstr) {
+    return str_replace($rmvstr, "", $str2rmv);
+}
 function strpos_recursive($haystack, $needle, $offset = 0, &$results = array()) {               
     $offset = strpos($haystack, $needle, $offset);
     if($offset === false) {
@@ -67,7 +70,10 @@ $myfile = fopen("autoload.php", "w+");
 fwrite($myfile, "<?php \n");
 $meyw = scanfdir("DIR2SCAN");
 foreach ($meyw as $datatoprint){
-    fwrite($myfile, "require '" . $datatoprint . "'; \n");
+    $dt2prt = $datatoprint;
+    //If u want to remove "../"  in the $datatoprint(dir2yourfile), uncommentthe script below!!! 
+    //$dt2prt = removestr($datatoprint, "../");
+    fwrite($myfile, "require '" . $dt2prt . "'; \n");
 }
 fwrite($myfile, "?>");
 fclose($myfile);
