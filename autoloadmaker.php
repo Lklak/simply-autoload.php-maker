@@ -37,6 +37,7 @@ function getfex($fn){
 
 function scanfdir($dir = null){
     $filelist = array();
+    $f_ex = "FILE_EX_GOES_HERE";
     if (substr("$dir", -1) != "/" && !is_file($dir)){
         $dir .= "/";
     }
@@ -44,13 +45,13 @@ function scanfdir($dir = null){
         $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $fname){
             if (is_file($dir)){
-                if (getfex($fname) == "php"){
+                if (getfex($fname) == $f_ex){
                     array_push($filelist, $dir);
                 }
             }else{
                 $topush = scanfdir($dir . $fname);
                 foreach ($topush as $datatopush){
-                    if (getfex($datatopush) == "php"){
+                    if (getfex($datatopush) == $f_ex){
                         array_push($filelist, $datatopush);
                     }
                 }
@@ -64,7 +65,7 @@ function scanfdir($dir = null){
 }
 $myfile = fopen("autoload.php", "w+");
 fwrite($myfile, "<?php \n");
-$meyw = scanfdir("../../");
+$meyw = scanfdir("DIR2SCAN");
 foreach ($meyw as $datatoprint){
     fwrite($myfile, "require '" . $datatoprint . "'; \n");
 }
