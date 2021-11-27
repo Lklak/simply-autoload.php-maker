@@ -71,7 +71,7 @@ fwrite($myfile, "<?php \n");
 $meyw = scanfdir("DIR2SCAN");
 foreach ($meyw as $datatoprint){
     $dt2prt = $datatoprint;
-    //If u want to remove "../"  in the $datatoprint(dir2yourfile), uncommentthe script below!!! 
+    //If u want to remove "../"  in the $datatoprint(datatoprint is dir 2 your file), uncommentthe script below!!! 
     //$dt2prt = removestr($datatoprint, "../");
     fwrite($myfile, "require '" . $dt2prt . "'; \n");
 }
